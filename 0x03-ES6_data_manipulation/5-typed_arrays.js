@@ -1,17 +1,8 @@
-export default function updateStudentGradeByCity(students, city, newGrades) {
-  const defaultGrade = { grade: 'N/A' };
-
-  if (students instanceof Array) {
-    return students
-      .filter((student) => student.location === city)
-      .map((student) => ({
-        id: student.id,
-        firstName: student.firstName,
-        location: student.location,
-        grade: (newGrades
-          .filter((grade) => grade.studentId === student.id)
-          .pop() || defaultGrade).grade,
-      }));
+export default function createInt8TypedArray(length, position, value) {
+  if (position >= length) {
+    throw new Error('Position outside range');
   }
-  return [];
+  const buf = new DataView(new ArrayBuffer(length), 0, length);
+  buf.setInt8(position, value);
+  return buf;
 }
